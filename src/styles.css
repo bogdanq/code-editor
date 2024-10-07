@@ -1,0 +1,27 @@
+html,
+body,
+#root {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.folders {
+  padding: 10px 5px;
+}
+
+.panel {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor {
+  overflow: hidden;
+  height: 100%;
+}
