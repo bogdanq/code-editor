@@ -7,6 +7,7 @@ import { Playground } from "./playground";
 import { $splitPanelParams, changeSplitPanel } from "./model";
 
 import "allotment/dist/style.css";
+import { OnlineUsers } from "./online-users";
 
 export const Editor = () => {
   const splitPanelParams = useUnit($splitPanelParams);
@@ -15,7 +16,15 @@ export const Editor = () => {
   return (
     <Allotment className="container">
       <Allotment.Pane className="panel" preferredSize="15%">
-        <FoldersTree />
+        <Allotment vertical>
+          <Allotment.Pane className="panel" preferredSize="70%">
+            <FoldersTree />
+          </Allotment.Pane>
+
+          <Allotment.Pane className="panel" preferredSize="30%">
+            <OnlineUsers />
+          </Allotment.Pane>
+        </Allotment>
       </Allotment.Pane>
 
       <Allotment.Pane className="panel" preferredSize="60%">

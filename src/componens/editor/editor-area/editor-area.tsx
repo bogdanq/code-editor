@@ -11,7 +11,7 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import { Button, Input, Tooltip, Typography } from "antd";
 import { PanelHeader } from "../components";
 import { $docs, $language, changeDoc } from "../model";
-import { NoData } from "./styled";
+import { NoData, Wrapper } from "./styled";
 import { LanguageSelect } from "./language-select";
 import { onMountEditor } from "./config";
 import { useDoc } from "../useDoc";
@@ -44,7 +44,7 @@ export const EditorArea = ({
   }, [visibleCopyTooltip]);
 
   return (
-    <div className="editor">
+    <Wrapper>
       <PanelHeader
         actions={[
           <Button size="small" type="primary">
@@ -92,6 +92,6 @@ export const EditorArea = ({
           <Typography.Text strong>Выберите или создайте файл</Typography.Text>
         </NoData>
       )}
-    </div>
+    </Wrapper>
   );
 };

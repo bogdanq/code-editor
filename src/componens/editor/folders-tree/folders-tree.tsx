@@ -6,7 +6,7 @@ import { useUnit } from "effector-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PanelHeader } from "../components";
 import { $docs, deleteDoc, Docs, createDoc } from "../model";
-import { ListItem } from "./styled";
+import { ListItem, Wrapper } from "./styled";
 import { FileIcon } from "./file-icon";
 
 export const FoldersTree = () => {
@@ -35,7 +35,7 @@ export const FoldersTree = () => {
   });
 
   return (
-    <div>
+    <>
       <PanelHeader
         actions={[
           <Button
@@ -48,63 +48,65 @@ export const FoldersTree = () => {
         ]}
       />
 
-      <Col>
-        <List
-          loading={false}
-          itemLayout="horizontal"
-          dataSource={docs}
-          renderItem={(doc) => (
-            <ListItem
-              active={doc.id === docId}
-              onClick={() => navigate(doc.id)}
-              actions={[
-                <DeleteOutlined
-                  onClick={() => setDeleteFileId(doc)}
-                  className="item-icon"
-                />,
-              ]}
-            >
-              <List.Item.Meta
-                avatar={<FileIcon type={doc.type} />}
-                title=""
-                description={doc.title}
-              />
-            </ListItem>
-          )}
-        />
-
-        <Modal
-          open={isModalOpen}
-          title="Новый файл"
-          onCancel={() => setModalOpen(false)}
-          cancelText="Отмена"
-          onOk={() => {
-            docsAction.createDoc({ title, id: nanoid() });
-            setModalOpen(false);
-            setTitle("");
-          }}
-          okButtonProps={{ title: "Сохранить" }}
-        >
-          <Input
-            placeholder="Введите название файла"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+      <Wrapper>
+        <Col>
+          <List
+            loading={false}
+            itemLayout="horizontal"
+            dataSource={docs}
+            renderItem={(doc) => (
+              <ListItem
+                active={doc.id === docId}
+                onClick={() => navigate(doc.id)}
+                actions={[
+                  <DeleteOutlined
+                    onClick={() => setDeleteFileId(doc)}
+                    className="item-icon"
+                  />,
+                ]}
+              >
+                <List.Item.Meta
+                  avatar={<FileIcon type={doc.type} />}
+                  title=""
+                  description={doc.title}
+                />
+              </ListItem>
+            )}
           />
-        </Modal>
 
-        <Modal
-          open={!!deleteFileId}
-          title="Точно удалить файл?"
-          onCancel={() => setDeleteFileId(null)}
-          cancelText="Отмена"
-          onOk={() => {
-            docsAction.deleteDoc(deleteFileId?.id!);
-            setDeleteFileId(null);
-            navigate(".", { relative: "path" });
-          }}
-          okButtonProps={{ title: "Удалить" }}
-        />
-      </Col>
-    </div>
+          <Modal
+            open={isModalOpen}
+            title="Новый файл"
+            onCancel={() => setModalOpen(false)}
+            cancelText="Отмена"
+            onOk={() => {
+              docsAction.createDoc({ title, id: nanoid() });
+              setModalOpen(false);
+              setTitle("");
+            }}
+            okButtonProps={{ title: "Сохранить" }}
+          >
+            <Input
+              placeholder="Введите название файла"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Modal>
+
+          <Modal
+            open={!!deleteFileId}
+            title="Точно удалить файл?"
+            onCancel={() => setDeleteFileId(null)}
+            cancelText="Отмена"
+            onOk={() => {
+              docsAction.deleteDoc(deleteFileId?.id!);
+              setDeleteFileId(null);
+              navigate(".", { relative: "path" });
+            }}
+            okButtonProps={{ title: "Удалить" }}
+          />
+        </Col>
+      </Wrapper>
+    </>
   );
 };
