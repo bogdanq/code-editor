@@ -1,3 +1,4 @@
 # Редактор кода
 
-<img width="1680" alt="image" src="https://github.com/user-attachments/assets/87c255e8-a53e-4071-a18e-68ce89372d3e">
+<img width="1679" alt="image" src="https://github.com/user-attachments/assets/5d20b3ba-4e43-4d8e-a354-648b6268170c">
+
